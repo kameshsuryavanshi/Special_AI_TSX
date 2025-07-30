@@ -138,16 +138,16 @@
 // export default Header;
 
 
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
+const Header: React.FC = () => {
+  // Explicitly type the state variables
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isDesktop, setIsDesktop] = useState<boolean>(true);
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -161,7 +161,8 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const menuItems = [
+  // Explicitly type the array of menu items
+  const menuItems: string[] = [
     "Home",
     "About",
     "Solutions",
@@ -242,7 +243,7 @@ const Header = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          exit={{ opacity: 0, y: -20 }} // Add exit for better animation when closing
           className="lg:hidden bg-[#325BFF] border-t border-blue-600 shadow-lg"
         >
           <div className="px-4 py-4 space-y-3">
@@ -251,7 +252,7 @@ const Header = () => {
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className="block py-2 text-white/90 hover:text-white transition-colors font-small text-base"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIsMenuOpen(false)} // Close menu on item click
               >
                 {item}
               </a>
@@ -260,7 +261,7 @@ const Header = () => {
               <a
                 href="https://dumroo.ai/register"
                 className="block bg-[#EBB35C] text-[#325BFF] px-6 py-2.5 rounded-md hover:bg-[#d9a04a] hover:shadow-lg transition-all duration-300 font-semi text-base text-center"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIsMenuOpen(false)} // Close menu on CTA click
               >
                 Get Started
               </a>
@@ -271,6 +272,5 @@ const Header = () => {
     </header>
   );
 };
-
 
 export default Header;
